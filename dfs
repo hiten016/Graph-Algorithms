@@ -1,0 +1,22 @@
+/* Hiten Mahajan */ 
+/* DFS Algorithm  */
+void dfs(int curr, vector<vector<int>>& edges, int parent, vector<int>& parents){
+    parents[curr] = parent;
+
+    for(int neighbour : edges[curr])
+        if(neighbour != parent)
+            dfs(neighbour, edges, curr, parents);
+}
+void solve() {
+    int n;
+    cin >> n;
+    vector<vector<int>> edges(n, vector<int>());
+    for(int i = 0; i < n - 1; i++){
+        int u, v;
+        cin >> u >> v;
+        edges[u].push_back(v);
+        edges[v].push_back(u);
+    }    
+    vector<int> parents(n, -1);
+    dfs(0, edges, -1, parents);
+}
